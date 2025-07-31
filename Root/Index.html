@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>主页 - CynFox</title>
+		<style type="Text/CSS">
+			body
+			{
+				min-width: 1024px;
+			}
+			#SearchBox
+			{
+				margin-top: 50px;
+			}
+			#SearchInput
+			{
+				width: 400px;
+				height: 16px;
+				padding: 12px;
+				outline: none;
+				border: 2px solid #C4C7CE;
+				border-right: 0;
+				border-radius: 7px;
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+				vertical-align: middle;
+				font-size: 16px;
+				font-family: "Arial", sans-serif;
+			}
+			#SearchInput:hover
+			{
+				border-color: #A7AAB5;
+			}
+			#SearchButton
+			{
+				width: 90px;
+				height: 40px;
+				padding: 0;
+				border: 2px solid #FFA500;
+				border-right: 0;
+				border-radius: 7px;
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+				background-color: #FFA500;
+				box-sizing: content-box;
+				vertical-align: middle;
+				cursor: pointer;
+				font-size: 18px;
+				font-family: "Arial", sans-serif;
+				color: white;
+			}
+			#SearchButton:hover
+			{
+				border-color: #FF9500;
+				background-color: #FF9500;
+			}
+		</style>
+	</head>
+	<body>
+		<center id="SearchBox">
+			<input id="SearchInput" type="Text" /><button id="SearchButton" onClick="Search();">搜索</button>
+		</center>
+	</body>
+	<footer>
+		<script type="Text/JavaScript">
+			document.getElementById("SearchInput").addEventListener("keydown", function(Event) { if (Event.key === "Enter") { document.getElementById("SearchButton").click(); }; });
+			function Search()
+			{
+				var BaseUrl = window.location.href.substring(0, window.location.href.indexOf('/',  8) || window.location.href.length);
+				
+				var SearchText = document.getElementById("SearchInput").value;
+				if (SearchText == "")
+				{
+					return ;
+				};
+				
+				var EncodeText = encodeURIComponent(SearchText).replace(/[!'()*]/g, Str => `%${Str.charCodeAt(0).toString(16).toUpperCase()}`);
+				var SafeUrl = `${BaseUrl}/Search.php?Content=${EncodeText}`;
+
+				console.log(SafeUrl);
+				
+				window.open(SafeUrl, "_blank");
+			};
+		</script>
+	</footer>
+</html>
